@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ポートフォリオ</title>
+</head>
+<body>
+<header>
+    <h1>家計簿</h1>
+</header>
+<!-- 登録内容：日時、内容、金額-->
+<h2>データ登録</h2>
+<table>
+    <tr><td>登録日付</td><td><input type="date"></td></tr>
+    <tr><td>登録内容</td><td><input type="text"></td></tr>
+    <tr><td>金額</td><td><input type="number" min="1"></td></tr>
+    <tr><td><button>登録</button></td></tr>
+</table>
+
+<main>
+    <input type="date">~<input type="date">
+    <button>指定期間表示</button>
+    <table>
+     <tr>
+         <th>日付</th>
+         <th>内容</th>
+         <th>金額</th>
+     </tr>
+    </table>
+</main>
+
+<script>
+    var date = new Date();
+
+    // 年月日を配列で取得
+    var dateArray = geTSDate(date);
+
+    // DB 情報を設定
+    var dbName = 'household_account_book';                  //DB名
+    var dbVersion = '1.0';                                  //DBバージョン
+    var dbDescription = 'household_account_book_database';  //DB説明文
+    var dbSize =65536;                                      //DBサイズ
+    var db = openDatabase(dbName,dbVersion,dbDescription,dbSize);
+
+    // テーブルが存在しない場合、テーブルを作成
+    db.transaction(function(trns) {
+        trns.executeSql('create table if not exists had (id integer primary key autoincrement,contents text not null,price int not null,registes_at datetime)')
+    });
+
+
+    //登録日付に、本日の年月日を設定
+    document.getElementById("regist_data").value = dateArray[0] + "-" + dateArray[1] +"-" +dateArray[2]
+
+    // 今月のデータを表示
+
+    function displayThisMontData(){
+        var date = new Date();
+    }
+</script>
+</body>
+</html>
