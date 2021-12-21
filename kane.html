@@ -54,10 +54,19 @@
     document.getElementById("regist_data").value = dateArray[0] + "-" + dateArray[1] +"-" +dateArray[2]
 
     // 今月のデータを表示
+  displayThisMonthData();
 
     function displayThisMontData(){
         var date = new Date();
     }
+ 
+ var lastDateArray = getTSDate(new Date(getLastDay(date.getFullYear(),date.getMonth())));
+
+ var YM = lastDateArray[0] + "-" + lastDateArray[1];
+ var starDate = YM + "-" + "01 00:00:00";
+ var lastDate = YM + "-" + lastDateArray[2]; + "23:59:59";
+ 
+
 </script>
 </body>
 </html>
